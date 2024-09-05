@@ -1,41 +1,8 @@
 import { Link } from "react-router-dom";
 import { listaProdutos } from "../../listaProdutos";
-import styled from "styled-components";
+import { MinhaTabela }
 
-const MinhaTabela = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 18px;
-  text-align: left;
 
-&  
-thead{
-    background-color: #009879;
-  color: #6f0f0f;
-}
-
-&
-th{
-    padding: 12px 15px;
-  border: 1px solid #dddddd;
-}
-&
-tr{
-    &:nth-child(even) {
-        background-color: #f3f3f3;
-      }
-      &:nth-child(odd) {
-        background-color: #ffffff;
-      }
-}
-&
-td{
-    padding: 12px 15px;
-  border: 1px solid #dddddd;
-}
-
-`
 
 export default function Produtos() {
 
@@ -77,3 +44,38 @@ export default function Produtos() {
     </div>
   );
 }
+
+export const MinhaTabela = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+
+&  
+thead{
+    background-color: #009879;
+  color: #6f0f0f;
+}
+
+&
+th{
+    padding: 12px 15px;
+  border: 1px solid #dddddd;
+}
+&
+tr{
+    &:nth-child(even) {
+        background-color: #f3f3f3;
+      }
+      &:nth-child(odd) {
+        background-color: #ffffff;
+      }
+}
+&
+td{
+    padding: 12px 15px;
+  border: 1px solid #dddddd;
+}
+
+`
