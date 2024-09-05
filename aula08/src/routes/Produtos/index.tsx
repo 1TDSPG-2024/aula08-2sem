@@ -1,46 +1,18 @@
 import { Link } from "react-router-dom";
-import { listaProdutos } from "../../listaProdutos";
-import styled from "styled-components";
-
-const MinhaTabela = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 18px;
-  text-align: left;
-
-&  
-thead{
-    background-color: #009879;
-  color: #6f0f0f;
-}
-
-&
-th{
-    padding: 12px 15px;
-  border: 1px solid #dddddd;
-}
-&
-tr{
-    &:nth-child(even) {
-        background-color: #f3f3f3;
-      }
-      &:nth-child(odd) {
-        background-color: #ffffff;
-      }
-}
-&
-td{
-    padding: 12px 15px;
-  border: 1px solid #dddddd;
-}
-
-`
+import "../../listaProdutos";
+import { MinhaTabela } from "../../style/styled";
+import { Lista } from "../../types";
+import { useState } from "react";
 
 export default function Produtos() {
 
   //MUDANDO O TÍTULO DA PÁGINA!!!
   document.title = "PRODUTOS";
+  
+  const listaProdutosString = localStorage.getItem("lista") || '[]';
+  const lista:Lista[] = JSON.parse(listaProdutosString);
+  
+  const [produtos] = useState<Lista[]>(lista);
 
   return (
     <div>
@@ -57,7 +29,7 @@ export default function Produtos() {
           </tr>
         </thead>
         <tbody>
-          {listaProdutos.map((produto) => (
+          {produtos.map((produto) => (
             <tr key={produto.id}>
               <td>{produto.id}</td>
               <td>{produto.nome}</td>
@@ -70,7 +42,7 @@ export default function Produtos() {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={6}>Total de produtos: <span>{listaProdutos.length}</span></td>
+            <td colSpan={6}>Total de produtos: <span>{produtos.length}</span></td>
           </tr>
         </tfoot>
       </MinhaTabela>
