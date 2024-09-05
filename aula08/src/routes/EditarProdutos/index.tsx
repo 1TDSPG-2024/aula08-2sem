@@ -17,29 +17,56 @@ export default function EditarProdutos(){
       const listaProdutosString = localStorage.getItem("lista") || '[]';
       const lista:Lista[] = JSON.parse(listaProdutosString);
 
-      const [produto, setProduto] = useState<Lista>()
+      const [produto, setProduto] = useState<Lista>();
+
+      const [prodEditar, setProdEditar] = useState(
+        {
+          id: Number(id),
+          nome: "",
+          preco: 0,
+          desc:"",
+          imagem:""
+        }
+      );
 
       useEffect(()=>{
         setProduto(lista.find((prod) => prod.id === Number(id)));
-      });
+      },[]);
+
+      const handleSubmit = (evento:React.FormEvent<HTMLFormElement>) => {
+
+        evento.preventDefault();
+
+        let indexProduto:number;
+
+        if(prodEditar){
+          indexProduto = lista.findIndex(p => p.id == prodEditar.id)
+          lista.splice(indexProduto,1,prodEditar);
+          localStorage.setItem("lista", JSON.stringify(lista));
+          alert("Produto editado com sucesso!");
+        }else{
+          alert("Erro ao editar produto!");
+        }
+
+      }
 
       return(
       <div>
         <h1>Olá, mundo sou o EditarProdutos!</h1>
         <div>
           <h2>ID: {id}</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <label>Nome:</label>
-              <input type="text" name="nome" value={produto?.nome} />
+              <input type="text" name="nome" value={produto?.nome}  onChange={(e)=> setProdEditar({...prodEditar, nome:e.target.value})} />
             </div>
             <div>
               <label>Preço:</label>
-              <input type="number" name="preco" value={produto?.preco} />
+              <input type="number" name="preco" value={produto?.preco} onChange={(e)=> setProdEditar({...prodEditar, nome:e.target.value})}/>
             </div>
             <div>
               <label>Descrição:</label>
-              <textarea name="desc" value={produto?.desc}></textarea>
+              <textarea name="desc" value={produto?.desc} onChange={(e)=> setProdEditar({...prodEditar, nome:e.target.value})}/>
             </div>
             <div>
               <figure>
@@ -47,7 +74,7 @@ export default function EditarProdutos(){
               </figure>
             </div>
             <div>
-              <button type="button">Editar</button>
+              <button type="submit">Editar</button>
             </div>
           </form>
         </div>
