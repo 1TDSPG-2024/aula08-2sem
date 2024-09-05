@@ -3,7 +3,6 @@ import { Lista } from "./types";
 //Criar uma lista de produtos eletrônicos com os seguintes dados:
 //id,nome,preco,desc,imagem=path
 
-
 export const listaProdutos:Lista[] = [
     {
         id: 1,
